@@ -20,4 +20,10 @@ public interface ArticleDao {
             SELECT * FROM article
             """)
     List<Article> findAll();
+
+    @Select("""
+            SELECT * FROM article
+                WHERE id = #{id}
+            """)
+    Article findById(Long id);
 }

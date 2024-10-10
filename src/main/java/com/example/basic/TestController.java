@@ -2,6 +2,7 @@ package com.example.basic;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
@@ -13,12 +14,20 @@ public class TestController {
 
     private final ArticleDao articleDao;
 
-    @RequestMapping("/t5")
+    @RequestMapping("/t8/{id}")
     @ResponseBody
-    public String t5(String title, String body){
-        articleDao.save(title, body);
+    public Article t8(@PathVariable("id") long id){
+        Article article = articleDao.findById(id);
 
-        return "성공";
+        return article;
+    }
+
+    @RequestMapping("/t7")
+    @ResponseBody
+    public Article t7(long id){
+        Article article = articleDao.findById(id);
+
+        return article;
     }
 
     @RequestMapping("/t6")
@@ -27,6 +36,14 @@ public class TestController {
         List<Article> articleList = articleDao.findAll();
 
         return articleList;
+    }
+
+    @RequestMapping("/t5")
+    @ResponseBody
+    public String t5(String title, String body){
+        articleDao.save(title, body);
+
+        return "성공";
     }
 
     @RequestMapping("/test")
