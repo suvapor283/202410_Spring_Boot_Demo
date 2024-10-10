@@ -49,7 +49,13 @@ public class TestController {
     @RequestMapping("/article/update/{id}")
     @ResponseBody
     public String update(@PathVariable long id, String title, String body){
-        articleDao.update(id, title, body);
+        Article article = Article.builder()
+                .id(1L)
+                .title(title)
+                .body(body)
+                .build();
+
+        articleDao.update(article);
 
         return "성공";
     }
