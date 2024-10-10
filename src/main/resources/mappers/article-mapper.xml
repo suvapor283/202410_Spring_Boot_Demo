@@ -9,9 +9,9 @@
                 , `body` = #{body}
     </insert>
 
-<!--    <select id="findAll" resultType="com.example.basic.Article">-->
-<!--        SELECT * FROM article-->
-<!--    </select>-->
+    <select id="findAll" resultType="com.example.basic.Article">
+        SELECT * FROM article
+    </select>
 
     <select id="findById" parameterType="long" resultType="com.example.basic.Article">
         SELECT * FROM article
