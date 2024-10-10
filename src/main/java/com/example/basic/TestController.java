@@ -13,12 +13,20 @@ public class TestController {
 
     private final ArticleDao articleDao;
 
-    @RequestMapping("/save")
+    @RequestMapping("/t5")
     @ResponseBody
-    public String save(String title, String body){
+    public String t5(String title, String body){
         articleDao.save(title, body);
 
         return "성공";
+    }
+
+    @RequestMapping("/t6")
+    @ResponseBody
+    public List<Article> t6(){
+        List<Article> articleList = articleDao.findAll();
+
+        return articleList;
     }
 
     @RequestMapping("/test")
