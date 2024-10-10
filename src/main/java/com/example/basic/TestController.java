@@ -1,5 +1,6 @@
 package com.example.basic;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -7,7 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class testController {
+@RequiredArgsConstructor
+public class TestController {
+
+    private final ArticleDao articleDao;
+
+    @RequestMapping("/save")
+    @ResponseBody
+    public String save(String title, String body){
+        articleDao.save(title, body);
+
+        return "성공";
+    }
 
     @RequestMapping("/test")
     @ResponseBody
