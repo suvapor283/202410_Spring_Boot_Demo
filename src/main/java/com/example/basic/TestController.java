@@ -16,7 +16,7 @@ public class TestController {
 
     @RequestMapping("/article/detail/{id}")
     @ResponseBody
-    public Article detail(@PathVariable("id") long id){
+    public Article detail(@PathVariable("id") long id) {
         Article article = articleDao.findById(id);
 
         return article;
@@ -24,7 +24,7 @@ public class TestController {
 
     @RequestMapping("/article/list")
     @ResponseBody
-    public List<Article> list(){
+    public List<Article> list() {
         List<Article> articleList = articleDao.findAll();
 
         return articleList;
@@ -32,31 +32,36 @@ public class TestController {
 
     @RequestMapping("/article/write")
     @ResponseBody
-    public String write(String title, String body){
-        articleDao.save(title, body);
+    public String write(String title, String body) {
+        Article article = Article.builder()
+                .title(title)
+                .body(body)
+                .build();
 
-        return "성공";
+        articleDao.save(article);
+
+        return "write 성공";
     }
 
     @RequestMapping("/article/delete/{id}")
     @ResponseBody
-    public String delete(@PathVariable("id") long id){
+    public String delete(@PathVariable("id") long id) {
         articleDao.deleteById(id);
 
-        return "성공";
+        return "delete 성공";
     }
 
     @RequestMapping("/article/update/{id}")
     @ResponseBody
-    public String update(@PathVariable long id, String title, String body){
+    public String update(@PathVariable long id, String title, String body) {
         Article article = Article.builder()
-                .id(1L)
+                .id(id)
                 .title(title)
                 .body(body)
                 .build();
 
         articleDao.update(article);
 
-        return "성공";
+        return "update 성공";
     }
 }
