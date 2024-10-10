@@ -11,4 +11,5 @@ public interface ArticleDao {
     void save(@Param("title") String title, @Param("body") String body);
     List<Article> findAll();
     Article findById(Long id);
+    void deleteById(Long id);
 }

@@ -37,4 +37,12 @@ public class TestController {
 
         return "성공";
     }
+
+    @RequestMapping("/article/delete/{id}")
+    @ResponseBody
+    public String delete(@PathVariable("id") long id){
+        articleDao.deleteById(id);
+
+        return "성공";
+    }
 }
