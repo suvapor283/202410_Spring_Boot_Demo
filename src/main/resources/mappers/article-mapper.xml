@@ -22,4 +22,11 @@
         DELETE FROM article
             WHERE id = #{id}
     </delete>
+
+    <update id="update" parameterType="map">
+        UPDATE article
+            SET title = #{title}
+                , `body` = #{body}
+            WHERE id = #{id}
+    </update>
 </mapper>

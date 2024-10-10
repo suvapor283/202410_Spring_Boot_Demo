@@ -45,4 +45,12 @@ public class TestController {
 
         return "성공";
     }
+
+    @RequestMapping("/article/update/{id}")
+    @ResponseBody
+    public String update(@PathVariable long id, String title, String body){
+        articleDao.update(id, title, body);
+
+        return "성공";
+    }
 }
