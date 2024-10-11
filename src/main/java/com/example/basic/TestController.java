@@ -64,4 +64,12 @@ public class TestController {
 
         return "update 성공";
     }
+
+    @RequestMapping("/show/html")
+    @ResponseBody
+    public String showHtml(){
+        return """
+                <a href="https://www.naver.com">네이버로 가기</a>
+                """;
+    }
 }
