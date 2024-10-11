@@ -2,9 +2,7 @@ package com.example.basic;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,6 +12,7 @@ public class ArticleController {
 
     private final ArticleDao articleDao;
 
+    // detail
     @RequestMapping("/article/detail/{id}")
     @ResponseBody
     public Article detail(@PathVariable("id") long id) {
@@ -22,6 +21,7 @@ public class ArticleController {
         return article;
     }
 
+    // list
     @RequestMapping("/article/list")
     @ResponseBody
     public List<Article> list() {
@@ -30,7 +30,13 @@ public class ArticleController {
         return articleList;
     }
 
-    @RequestMapping("/article/write")
+    // write
+    @GetMapping("/article/write")
+    public String write() {
+        return "article/write";
+    }
+
+    @PostMapping("/article/write")
     @ResponseBody
     public String write(String title, String body) {
         Article article = Article.builder()
@@ -43,6 +49,7 @@ public class ArticleController {
         return "write 성공";
     }
 
+    // delete
     @RequestMapping("/article/delete/{id}")
     @ResponseBody
     public String delete(@PathVariable("id") long id) {
@@ -51,6 +58,7 @@ public class ArticleController {
         return "delete 성공";
     }
 
+    // modify
     @RequestMapping("/article/modify/{id}")
     @ResponseBody
     public String update(@PathVariable long id, String title, String body) {
@@ -68,10 +76,5 @@ public class ArticleController {
     @RequestMapping("/show-html")
     public String showHtml() {
         return "test";
-    }
-
-    @RequestMapping("/article-write")
-    public String write(){
-        return "article/write";
     }
 }
