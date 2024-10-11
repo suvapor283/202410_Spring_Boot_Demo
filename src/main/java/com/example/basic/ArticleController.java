@@ -10,7 +10,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class TestController {
+public class ArticleController {
 
     private final ArticleDao articleDao;
 
@@ -51,7 +51,7 @@ public class TestController {
         return "delete 성공";
     }
 
-    @RequestMapping("/article/update/{id}")
+    @RequestMapping("/article/modify/{id}")
     @ResponseBody
     public String update(@PathVariable long id, String title, String body) {
         Article article = Article.builder()
@@ -68,5 +68,10 @@ public class TestController {
     @RequestMapping("/show-html")
     public String showHtml() {
         return "test";
+    }
+
+    @RequestMapping("/article-write")
+    public String write(){
+        return "article/write";
     }
 }
