@@ -7,12 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TestController {
 
     @GetMapping("/test/var")
-    public String var(){
-     return "test/variable";
+    public String var() {
+        return "test/variable";
     }
 
     @GetMapping("/test/con")
-    public String con(){
+    public String con() {
         return "test/condition";
+    }
+
+    @GetMapping("/test/loop")
+    public String loop() {
+        return "test/loop";
     }
 }
