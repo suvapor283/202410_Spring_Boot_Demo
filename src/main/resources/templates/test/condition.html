@@ -11,5 +11,11 @@
   <span th:unless="${num % 2 == 1}" th:text="짝수"></span>
 </div>
 
+<hr>
+<div th:with="age=18">
+  <div th:if="${age < 20 || age >= 60}">할인대상</div>
+  <div th:unless="${age < 20 || age >= 60}">비할인대상</div>
+</div>
+
 </body>
 </html>
