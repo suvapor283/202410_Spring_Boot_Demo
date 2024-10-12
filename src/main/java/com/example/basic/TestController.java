@@ -10,4 +10,9 @@ public class TestController {
     public String var(){
      return "test/variable";
     }
+
+    @GetMapping("/test/con")
+    public String con(){
+        return "test/condition";
+    }
 }
