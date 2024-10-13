@@ -63,8 +63,9 @@ public class ArticleController {
     // modify
     @Getter
     public static class ModifyForm {
-
+        @NotBlank
         private String title;
+        @NotBlank
         private String body;
     }
 
