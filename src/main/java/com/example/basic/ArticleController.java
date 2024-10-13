@@ -38,7 +38,6 @@ public class ArticleController {
     }
 
     @PostMapping("/article/write")
-    @ResponseBody
     public String write(String title, String body) {
         Article article = Article.builder()
                 .title(title)
@@ -47,7 +46,7 @@ public class ArticleController {
 
         articleDao.save(article);
 
-        return "write 성공";
+        return "redirect:/article/list";
     }
 
     // modify
