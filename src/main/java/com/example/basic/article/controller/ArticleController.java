@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +47,7 @@ public class ArticleController {
     }
 
     @Getter
+    @Setter
     public static class WriteForm {
         @NotBlank
         private String title;
@@ -62,6 +64,7 @@ public class ArticleController {
 
     // modify
     @Getter
+    @Setter
     public static class ModifyForm {
         @NotBlank
         private String title;
