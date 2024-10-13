@@ -65,10 +65,9 @@ public class ArticleController {
 
     // delete
     @RequestMapping("/article/delete/{id}")
-    @ResponseBody
     public String delete(@PathVariable("id") long id) {
         articleDao.deleteById(id);
 
-        return "delete 성공";
+        return "redirect:/article/list";
     }
 }
