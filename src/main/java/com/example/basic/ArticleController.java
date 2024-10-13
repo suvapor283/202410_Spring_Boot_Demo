@@ -50,15 +50,6 @@ public class ArticleController {
         return "write 성공";
     }
 
-    // delete
-    @RequestMapping("/article/delete/{id}")
-    @ResponseBody
-    public String delete(@PathVariable("id") long id) {
-        articleDao.deleteById(id);
-
-        return "delete 성공";
-    }
-
     // modify
     @RequestMapping("/article/modify/{id}")
     @ResponseBody
@@ -71,6 +62,15 @@ public class ArticleController {
 
         articleDao.update(article);
 
-        return "update 성공";
+        return "modify 성공";
+    }
+
+    // delete
+    @RequestMapping("/article/delete/{id}")
+    @ResponseBody
+    public String delete(@PathVariable("id") long id) {
+        articleDao.deleteById(id);
+
+        return "delete 성공";
     }
 }

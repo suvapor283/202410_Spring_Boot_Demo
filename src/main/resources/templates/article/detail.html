@@ -5,14 +5,18 @@
     <title>detail</title>
 </head>
 <body>
-<div>
-    <label for="title">제목</label>
-    <div th:text="${article.title}"></div>
-</div>
-<hr>
-<div>
-    <label for="body">내용</label>
-    <div th:text="${article.body}"></div>
-</div>
+<form th:action="@{|/article/modify/${article.id}|}" method="post">
+    <div>
+        <label for="title">제목</label>
+        <input type="text" name="title" th:value="${article.title}">
+    </div>
+    <hr>
+    <div>
+        <label for="body">내용</label>
+        <input type="text" name="body" th:value="${article.body}">
+    </div>
+    <br>
+    <input type="submit" value="수정">
+</form>
 </body>
 </html>
