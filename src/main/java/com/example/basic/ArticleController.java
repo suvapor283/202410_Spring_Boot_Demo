@@ -2,6 +2,7 @@ package com.example.basic;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,16 @@ public class ArticleController {
 
     private final ArticleDao articleDao;
 
+    // list
+    @RequestMapping("/article/list")
+    public String list(Model model) {
+        List<Article> articleList = articleDao.findAll();
+
+        model.addAttribute("articleList", articleList);
+
+        return "article/list";
+    }
+
     // detail
     @RequestMapping("/article/detail/{id}")
     @ResponseBody
@@ -19,15 +30,6 @@ public class ArticleController {
         Article article = articleDao.findById(id);
 
         return article;
-    }
-
-    // list
-    @RequestMapping("/article/list")
-    @ResponseBody
-    public List<Article> list() {
-        List<Article> articleList = articleDao.findAll();
-
-        return articleList;
     }
 
     // write
@@ -71,10 +73,5 @@ public class ArticleController {
         articleDao.update(article);
 
         return "update 성공";
-    }
-
-    @RequestMapping("/show-html")
-    public String showHtml() {
-        return "test";
     }
 }
