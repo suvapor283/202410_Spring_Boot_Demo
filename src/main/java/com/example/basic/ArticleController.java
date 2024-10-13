@@ -52,8 +52,7 @@ public class ArticleController {
 
     // modify
     @RequestMapping("/article/modify/{id}")
-    @ResponseBody
-    public String update(@PathVariable long id, String title, String body) {
+    public String update(@PathVariable long id, String title, String body, Model model) {
         Article article = Article.builder()
                 .id(id)
                 .title(title)
@@ -61,8 +60,9 @@ public class ArticleController {
                 .build();
 
         articleDao.update(article);
+        model.addAttribute("article", article);
 
-        return "modify 성공";
+        return "article/detail";
     }
 
     // delete
