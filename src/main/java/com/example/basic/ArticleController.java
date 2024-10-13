@@ -51,7 +51,7 @@ public class ArticleController {
 
     // modify
     @RequestMapping("/article/modify/{id}")
-    public String update(@PathVariable long id, String title, String body, Model model) {
+    public String update(@PathVariable long id, String title, String body) {
         Article article = Article.builder()
                 .id(id)
                 .title(title)
@@ -59,9 +59,8 @@ public class ArticleController {
                 .build();
 
         articleDao.update(article);
-        model.addAttribute("article", article);
 
-        return "article/detail";
+        return "redirect:/article/detail/%d".formatted(id);
     }
 
     // delete
