@@ -10,7 +10,7 @@
     <li><a href="/article/list">글목록</a></li>
 </ul>
 <hr>
-<form method="post" th:action="@{|/article/modify/${article.id}|}">
+<form method="post" th:action="@{|/article/modify/${article.id}|}" onsubmit="checkSubmit(this); return false;">
     <div>
         <label for="title">제목</label>
         <input name="title" th:value="${article.title}" type="text"/>
@@ -26,5 +26,21 @@
 <form method="post" th:action="@{|/article/delete/${article.id}|}">
     <input type="submit" value="삭제"/>
 </form>
+<script>
+    function checkSubmit(form) {
+        if (form.title.value.trim().length == 0) {
+            alert('제목을 입력해주세요.');
+            form.title.focus();
+            return;
+        }
+        if (form.body.value.trim().length == 0) {
+            alert('내용을 입력해주세요.');
+            form.body.focus();
+            return;
+        }
+
+        form.submit();
+    }
+</script>
 </body>
 </html>
