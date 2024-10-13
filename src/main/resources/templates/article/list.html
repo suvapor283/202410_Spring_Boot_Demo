@@ -6,6 +6,11 @@
 </head>
 <body>
 <ul>
+    <li><a href="/article/write">글쓰기</a></li>
+    <li><a href="/article/list">글목록</a></li>
+</ul>
+<hr>
+<ul>
     <li th:each="article : ${articleList}">
         <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.id} + ', ' + ${article.title}"></a>
     </li>
