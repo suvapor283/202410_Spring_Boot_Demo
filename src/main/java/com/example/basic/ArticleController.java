@@ -17,7 +17,6 @@ public class ArticleController {
     @RequestMapping("/article/list")
     public String list(Model model) {
         List<Article> articleList = articleDao.findAll();
-
         model.addAttribute("articleList", articleList);
 
         return "article/list";
@@ -25,11 +24,11 @@ public class ArticleController {
 
     // detail
     @RequestMapping("/article/detail/{id}")
-    @ResponseBody
-    public Article detail(@PathVariable("id") long id) {
+    public String detail(@PathVariable("id") long id, Model model) {
         Article article = articleDao.findById(id);
+        model.addAttribute("article", article);
 
-        return article;
+        return "article/detail";
     }
 
     // write
