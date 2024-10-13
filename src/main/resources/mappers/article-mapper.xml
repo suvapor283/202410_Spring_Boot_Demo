@@ -2,18 +2,18 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.basic.ArticleDao">
-    <insert id="save" parameterType="com.example.basic.Article">
+<mapper namespace="com.example.basic.article.dao.ArticleDao">
+    <insert id="save" parameterType="com.example.basic.article.entity.Article">
         INSERT INTO article
             SET title = #{title}
                 , `body` = #{body}
     </insert>
 
-    <select id="findAll" resultType="com.example.basic.Article">
+    <select id="findAll" resultType="com.example.basic.article.entity.Article">
         SELECT * FROM article
     </select>
 
-    <select id="findById" parameterType="long" resultType="com.example.basic.Article">
+    <select id="findById" parameterType="long" resultType="com.example.basic.article.entity.Article">
         SELECT * FROM article
             WHERE id = #{id}
     </select>
@@ -23,7 +23,7 @@
             WHERE id = #{id}
     </delete>
 
-    <update id="update" parameterType="com.example.basic.Article">
+    <update id="update" parameterType="com.example.basic.article.entity.Article">
         UPDATE article
             SET title = #{title}
                 , `body` = #{body}

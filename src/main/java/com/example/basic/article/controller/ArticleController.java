@@ -1,5 +1,7 @@
-package com.example.basic;
+package com.example.basic.article.controller;
 
+import com.example.basic.article.entity.Article;
+import com.example.basic.article.service.ArticleService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -17,12 +19,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ArticleController {
 
-    private final ArticleDao articleDao;
+    private final ArticleService articleService;
 
     // list
     @RequestMapping("/article/list")
     public String list(Model model) {
-        List<Article> articleList = articleDao.findAll();
+        List<Article> articleList = articleService.getAll();
         model.addAttribute("articleList", articleList);
 
         return "article/list";
@@ -31,13 +33,18 @@ public class ArticleController {
     // detail
     @RequestMapping("/article/detail/{id}")
     public String detail(@PathVariable("id") long id, Model model) {
-        Article article = articleDao.findById(id);
+        Article article = articleService.getById(id);
         model.addAttribute("article", article);
 
         return "article/detail";
     }
 
     // write
+    @GetMapping("/article/write")
+    public String articleWrite() {
+        return "article/write";
+    }
+
     @Getter
     public static class WriteForm {
         @NotBlank
@@ -46,49 +53,32 @@ public class ArticleController {
         private String body;
     }
 
-    @GetMapping("/article/write")
-    public String write() {
-        return "article/write";
-    }
-
     @PostMapping("/article/write")
-    public String write(@Valid WriteForm writeForm) {
-        Article article = Article.builder()
-                .title(writeForm.getTitle())
-                .body(writeForm.getBody())
-                .build();
-
-        articleDao.save(article);
+    public String write(@Valid WriteForm writeForm, Model model) {
+        articleService.write(writeForm.title, writeForm.body);
 
         return "redirect:/article/list";
     }
 
     // modify
     @Getter
-    public static class modifyForm {
-        @NotBlank
+    public static class ModifyForm {
+
         private String title;
-        @NotBlank
         private String body;
     }
 
     @RequestMapping("/article/modify/{id}")
-    public String update(@PathVariable long id, @Valid modifyForm modifyForm) {
-        Article article = Article.builder()
-                .id(id)
-                .title(modifyForm.getTitle())
-                .body(modifyForm.getBody())
-                .build();
-
-        articleDao.update(article);
+    public String modify(@PathVariable("id") long id, @Valid ModifyForm modifyForm) {
+        articleService.update(id, modifyForm.getTitle(), modifyForm.getBody());
 
         return "redirect:/article/detail/%d".formatted(id);
     }
 
     // delete
     @RequestMapping("/article/delete/{id}")
-    public String delete(@PathVariable("id") long id) {
-        articleDao.deleteById(id);
+    public String delete(@PathVariable long id) {
+        articleService.deleteById(id);
 
         return "redirect:/article/list";
     }

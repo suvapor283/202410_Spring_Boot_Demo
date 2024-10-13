@@ -13,9 +13,10 @@
     <li><a href="/article/list">글목록</a></li>
 </ul>
 <hr>
-<form action="/article/write" id="write-form" method="post" onsubmit="checkSubmit(); return false;">
-    <input id="input-title" name="title" placeholder="제목을 입력해주세요." type="text">
-    <input id="input-body" name="body" placeholder="내용을 입력해주세요." type="text">
+
+<form action="/article/write" id="write-form" method="POST" onsubmit="checkSubmit(); return false;">
+    <input id="input-title" name="title" placeholder="제목을 입력해주세요" type="text">
+    <input id="input-body" name="body" placeholder="내용을 입력해주세요" type="text">
     <input type="submit" value="등록">
 </form>
 <script>
@@ -25,12 +26,13 @@
         const titleInput = document.getElementById('input-title');
         const bodyInput = document.getElementById('input-body');
 
-        if (titleInput.value.trim().length == 0) {
+        if(titleInput.value.trim().length == 0) {
             alert('제목을 입력해주세요.');
             titleInput.focus();
             return;
         }
-        if (bodyInput.value.trim().length == 0) {
+
+        if(bodyInput.value.trim().length == 0) {
             alert('내용을 입력해주세요.');
             bodyInput.focus();
             return;

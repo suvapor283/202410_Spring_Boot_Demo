@@ -1,5 +1,6 @@
-package com.example.basic;
+package com.example.basic.article.dao;
 
+import com.example.basic.article.entity.Article;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

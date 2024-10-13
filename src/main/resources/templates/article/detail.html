@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>detail</title>
+    <title>datail</title>
 </head>
 <body>
 <ul>
@@ -10,32 +10,35 @@
     <li><a href="/article/list">글목록</a></li>
 </ul>
 <hr>
-<form method="post" th:action="@{|/article/modify/${article.id}|}" onsubmit="checkSubmit(this); return false;">
+<form method="post" onsubmit="checkSubmit(this); return false;" th:action="@{|/article/modify/${article.id}|}">
     <div>
         <label for="title">제목</label>
-        <input name="title" th:value="${article.title}" type="text"/>
+        <input name="title" th:value="${article.title}" type="text">
+        <!--    <div th:text="${article.title}"></div>-->
     </div>
     <hr>
     <div>
         <label for="body">내용</label>
-        <input name="body" th:value="${article.body}" type="text"/>
+        <input name="body" th:value="${article.body}" type="text">
+        <!--    <div th:text="${article.body}"></div>-->
     </div>
-    <br>
-    <input type="submit" value="수정">
+    <input type="submit" value="수정"/>
 </form>
 <form method="post" th:action="@{|/article/delete/${article.id}|}">
     <input type="submit" value="삭제"/>
 </form>
 <script>
     function checkSubmit(form) {
-        if (form.title.value.trim().length == 0) {
+        console.log('test');
+        if(form.title.value.trim().length == 0) {
             alert('제목을 입력해주세요.');
-            form.title.focus();
+            titleInput.focus();
             return;
         }
-        if (form.body.value.trim().length == 0) {
+
+        if(form.body.value.trim().length == 0) {
             alert('내용을 입력해주세요.');
-            form.body.focus();
+            bodyInput.focus();
             return;
         }
 
