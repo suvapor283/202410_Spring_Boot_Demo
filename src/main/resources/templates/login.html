@@ -1,13 +1,15 @@
 <html lang="ko" layout:decorate="~{article/layout}">
-<form action="" layout:fragment="content" class="flex flex-col gap-5 items-center mt-[50px]">
+<form action="/login" class="flex flex-col gap-5 items-center mt-[50px]" layout:fragment="content" method="post">
     <input
-            type="text"
+            class="input input-bordered input-primary w-full max-w-xs"
+            name="username"
             placeholder="아이디"
-            class="input input-bordered input-primary w-full max-w-xs" />
+            type="text"/>
     <input
-            type="text"
+            class="input input-bordered input-primary w-full max-w-xs"
+            name="password"
             placeholder="비밀번호"
-            class="input input-bordered input-primary w-full max-w-xs" />
-    <input type="submit" value="로그인" class="btn btn-outline btn-primary w-[100px]">
+            type="text"/>
+    <input class="btn btn-outline btn-primary w-[100px]" type="submit" value="로그인">
 </form>
 </html>

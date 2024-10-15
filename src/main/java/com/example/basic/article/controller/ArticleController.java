@@ -27,6 +27,7 @@ public class ArticleController {
     public String list(Model model) {
         List<Article> articleList = articleService.getAll();
         model.addAttribute("articleList", articleList);
+        model.addAttribute("loginedUser", "hong");
 
         return "article/list";
     }
