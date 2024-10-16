@@ -33,16 +33,17 @@ public class ArticleController {
 
         Cookie targetCookie = null;
 
-        for (Cookie cookie : cookies) {
-            if ("loginUser".equals(cookie.getName())) {
-                targetCookie = cookie;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("loginUser".equals(cookie.getName())) {
+                    targetCookie = cookie;
+                }
             }
         }
 
-        if (targetCookie == null){
+        if (targetCookie == null) {
             System.out.println("쿠키가 없습니다.");
-        }
-        else{
+        } else {
             System.out.println("cookie value : " + targetCookie.getValue());
             model.addAttribute("loginedUser", targetCookie.getValue());
         }
