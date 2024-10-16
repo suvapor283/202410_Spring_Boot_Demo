@@ -24,10 +24,15 @@ public class ArticleController {
 
     // list
     @RequestMapping("/article/list")
-    public String list(Model model) {
+    public String list(String loginedMember, Model model) {
         List<Article> articleList = articleService.getAll();
+
+
+
+        System.out.println("loginedMember : " + loginedMember);
+
         model.addAttribute("articleList", articleList);
-        model.addAttribute("loginedUser", "hong");
+        model.addAttribute("loginedUser", loginedMember);
 
         return "article/list";
     }
