@@ -30,7 +30,6 @@ public class ArticleController {
         List<Article> articleList = articleService.getAll();
 
         Cookie[] cookies = request.getCookies();
-
         Cookie targetCookie = null;
 
         if (cookies != null) {

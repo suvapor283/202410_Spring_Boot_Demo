@@ -1,6 +1,7 @@
 package com.example.basic;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -42,6 +43,27 @@ public class LoginController {
         cookie.setMaxAge(60 * 60);
         cookie.setPath("/");
         response.addCookie(cookie);
+
+        return "redirect:/article/list";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        Cookie[] cookies = request.getCookies();
+        Cookie targetCookie = null;
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("loginUser".equals(cookie.getName())) {
+                    targetCookie = cookie;
+                }
+            }
+        }
+
+        if (targetCookie != null) {
+            targetCookie.setMaxAge(0);
+            response.addCookie(targetCookie);
+        }
 
         return "redirect:/article/list";
     }

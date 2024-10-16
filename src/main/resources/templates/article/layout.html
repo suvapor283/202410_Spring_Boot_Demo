@@ -30,7 +30,8 @@
                     tabindex="0">
                 <li><a href="/article/write">글쓰기</a></li>
                 <li><a href="/article/list">글목록</a></li>
-                <li><a href="/login">로그인</a></li>
+                <li th:if="${loginedUser}"><a href="/logout">로그아웃</a></li>
+                <li th:unless="${loginedUser}"><a href="/login">로그인</a></li>
                 <li><a href="#">회원가입</a></li>
             </ul>
         </div>
