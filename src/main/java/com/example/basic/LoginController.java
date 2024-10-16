@@ -1,11 +1,12 @@
 package com.example.basic;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -28,7 +29,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid loginForm loginForm, Model model) {
+    public String login(@Valid loginForm loginForm, HttpServletResponse response) {
         String dbUser = "hong";
         String dbpass = "1234";
 
@@ -36,7 +37,11 @@ public class LoginController {
             return "login-fail";
         }
 
-        model.addAttribute("loginedUser", loginForm.username);
+        Cookie cookie = new Cookie("loginUser", loginForm.username);
+
+        cookie.setMaxAge(60 * 60);
+        cookie.setPath("/");
+        response.addCookie(cookie);
 
         return "redirect:/article/list";
     }

@@ -2,6 +2,8 @@ package com.example.basic.article.controller;
 
 import com.example.basic.article.entity.Article;
 import com.example.basic.article.service.ArticleService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -24,15 +26,28 @@ public class ArticleController {
 
     // list
     @RequestMapping("/article/list")
-    public String list(String loginedMember, Model model) {
+    public String list(Model model, HttpServletRequest request) {
         List<Article> articleList = articleService.getAll();
 
+        Cookie[] cookies = request.getCookies();
 
+        Cookie targetCookie = null;
 
-        System.out.println("loginedMember : " + loginedMember);
+        for (Cookie cookie : cookies) {
+            if ("loginUser".equals(cookie.getName())) {
+                targetCookie = cookie;
+            }
+        }
+
+        if (targetCookie == null){
+            System.out.println("쿠키가 없습니다.");
+        }
+        else{
+            System.out.println("cookie value : " + targetCookie.getValue());
+            model.addAttribute("loginedUser", targetCookie.getValue());
+        }
 
         model.addAttribute("articleList", articleList);
-        model.addAttribute("loginedUser", loginedMember);
 
         return "article/list";
     }
