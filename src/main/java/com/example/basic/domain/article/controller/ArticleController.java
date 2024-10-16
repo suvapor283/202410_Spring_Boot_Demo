@@ -1,7 +1,8 @@
-package com.example.basic.article.controller;
+package com.example.basic.domain.article.controller;
 
-import com.example.basic.article.entity.Article;
-import com.example.basic.article.service.ArticleService;
+import com.example.basic.global.ReqResHandler;
+import com.example.basic.domain.article.entity.Article;
+import com.example.basic.domain.article.service.ArticleService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -23,27 +24,16 @@ import java.util.List;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final ReqResHandler reqResHandler;
 
     // list
     @RequestMapping("/article/list")
     public String list(Model model, HttpServletRequest request) {
         List<Article> articleList = articleService.getAll();
 
-        Cookie[] cookies = request.getCookies();
-        Cookie targetCookie = null;
+        Cookie targetCookie = reqResHandler.getLoginCookie(request);
 
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("loginUser".equals(cookie.getName())) {
-                    targetCookie = cookie;
-                }
-            }
-        }
-
-        if (targetCookie == null) {
-            System.out.println("쿠키가 없습니다.");
-        } else {
-            System.out.println("cookie value : " + targetCookie.getValue());
+        if (targetCookie != null) {
             model.addAttribute("loginedUser", targetCookie.getValue());
         }
 
@@ -54,7 +44,13 @@ public class ArticleController {
 
     // detail
     @RequestMapping("/article/detail/{id}")
-    public String detail(@PathVariable("id") long id, Model model) {
+    public String detail(@PathVariable("id") long id, Model model, HttpServletRequest request) {
+        Cookie targetCookie = reqResHandler.getLoginCookie(request);
+
+        if (targetCookie != null) {
+            model.addAttribute("loginedUser", targetCookie.getValue());
+        }
+
         Article article = articleService.getById(id);
         model.addAttribute("article", article);
 
@@ -63,7 +59,12 @@ public class ArticleController {
 
     // write
     @GetMapping("/article/write")
-    public String articleWrite() {
+    public String articleWrite(Model model, HttpServletRequest request) {
+        Cookie targetCookie = reqResHandler.getLoginCookie(request);
+
+        if (targetCookie != null) {
+            model.addAttribute("loginedUser", targetCookie.getValue());
+        }
         return "article/write";
     }
 

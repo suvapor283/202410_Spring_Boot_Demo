@@ -1,18 +1,23 @@
-package com.example.basic;
+package com.example.basic.domain.login.controller;
 
+import com.example.basic.global.ReqResHandler;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
+@RequiredArgsConstructor
 public class LoginController {
+
+    private final ReqResHandler reqResHandler;
 
     // login
     @GetMapping("/login")
@@ -47,18 +52,10 @@ public class LoginController {
         return "redirect:/article/list";
     }
 
+    // logout
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
-        Cookie[] cookies = request.getCookies();
-        Cookie targetCookie = null;
-
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("loginUser".equals(cookie.getName())) {
-                    targetCookie = cookie;
-                }
-            }
-        }
+        Cookie targetCookie = reqResHandler.getLoginCookie(request);
 
         if (targetCookie != null) {
             targetCookie.setMaxAge(0);
