@@ -5,7 +5,6 @@ import com.example.basic.domain.article.service.ArticleService;
 import com.example.basic.global.ReqResHandler;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -29,15 +28,9 @@ public class ArticleController {
 
     // list
     @RequestMapping("/article/list")
-    public String list(Model model, HttpServletRequest request, HttpSession session) {
+    public String list(Model model, HttpServletRequest request) {
         List<Article> articleList = articleService.getAll();
-
-        String username = (String) session.getAttribute("loginUser");
-
-        if(username != null){
-            model.addAttribute("loginedUser", username);
-        }
-
+        
         model.addAttribute("articleList", articleList);
 
         return "article/list";
