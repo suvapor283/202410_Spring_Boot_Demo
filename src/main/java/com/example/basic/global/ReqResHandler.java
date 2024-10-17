@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class ReqResHandler {
 
     // 쿠키 전송 함수
-    public Cookie getLoginCookie(HttpServletRequest request){
+    public Cookie getLoginCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         Cookie targetCookie = null;
 

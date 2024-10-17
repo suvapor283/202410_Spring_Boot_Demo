@@ -33,7 +33,7 @@
                 <li th:if="${loginedUser}"><a href="/logout">로그아웃</a></li>
                 <li th:unless="${loginedUser}"><a href="/login">로그인</a></li>
                 <li><a href="#">회원가입</a></li>
-                <li><a href="/admin/main">관리자</a></li>
+                <li th:if="${loginedUser}"><a href="/admin/main">관리자</a></li>
             </ul>
         </div>
     </div>
