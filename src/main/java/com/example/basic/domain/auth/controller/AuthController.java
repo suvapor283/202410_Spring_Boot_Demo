@@ -5,6 +5,7 @@ import com.example.basic.global.ReqResHandler;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -39,7 +40,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid loginForm loginForm, HttpServletResponse response) {
+    public String login(@Valid loginForm loginForm, HttpServletResponse response, HttpSession session) {
         List<Member> memberList = new ArrayList<>();
 
         Member member1 = Member.builder()
@@ -70,14 +71,8 @@ public class AuthController {
             return "login-fail";
         }
 
-        Cookie cookie = new Cookie("loginUser", loginForm.username);
-        Cookie role = new Cookie("role", targetMember.getRole());
-
-        cookie.setMaxAge(60 * 60);
-        cookie.setPath("/");
-
-        response.addCookie(cookie);
-        response.addCookie(role);
+        session.setAttribute("loginUser", loginForm.username);
+        session.setAttribute("role", targetMember.getRole());
 
         return "redirect:/article/list";
     }
