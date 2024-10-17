@@ -5,6 +5,7 @@ import com.example.basic.domain.article.service.ArticleService;
 import com.example.basic.global.ReqResHandler;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -28,15 +29,13 @@ public class ArticleController {
 
     // list
     @RequestMapping("/article/list")
-    public String list(Model model, HttpServletRequest request) {
+    public String list(Model model, HttpServletRequest request, HttpSession session) {
         List<Article> articleList = articleService.getAll();
 
-        Cookie targetCookie = reqResHandler.getCookieByName(request, "loginUser");
+        String username = (String) session.getAttribute("loginUser");
 
-        if (targetCookie != null) {
-            model.addAttribute("loginedUser", targetCookie.getValue());
-            Cookie role = reqResHandler.getCookieByName(request, "role");
-            model.addAttribute("role", role.getValue());
+        if(username != null){
+            model.addAttribute("loginedUser", username);
         }
 
         model.addAttribute("articleList", articleList);
