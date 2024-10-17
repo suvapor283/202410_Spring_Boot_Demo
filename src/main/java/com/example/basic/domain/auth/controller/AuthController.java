@@ -2,9 +2,6 @@ package com.example.basic.domain.auth.controller;
 
 import com.example.basic.domain.auth.entity.Member;
 import com.example.basic.global.ReqResHandler;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -79,13 +76,8 @@ public class AuthController {
 
     // logout
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
-        Cookie targetCookie = reqResHandler.getCookieByName(request, "loginUser");
-
-        if (targetCookie != null) {
-            targetCookie.setMaxAge(0);
-            response.addCookie(targetCookie);
-        }
+    public String logout(HttpSession session) {
+        session.invalidate();
 
         return "redirect:/article/list";
     }
