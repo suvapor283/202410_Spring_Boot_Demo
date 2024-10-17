@@ -31,10 +31,12 @@ public class ArticleController {
     public String list(Model model, HttpServletRequest request) {
         List<Article> articleList = articleService.getAll();
 
-        Cookie targetCookie = reqResHandler.getLoginCookie(request);
+        Cookie targetCookie = reqResHandler.getCookieByName(request, "loginUser");
 
         if (targetCookie != null) {
             model.addAttribute("loginedUser", targetCookie.getValue());
+            Cookie role = reqResHandler.getCookieByName(request, "role");
+            model.addAttribute("role", role.getValue());
         }
 
         model.addAttribute("articleList", articleList);
@@ -45,10 +47,12 @@ public class ArticleController {
     // detail
     @RequestMapping("/article/detail/{id}")
     public String detail(@PathVariable("id") long id, Model model, HttpServletRequest request) {
-        Cookie targetCookie = reqResHandler.getLoginCookie(request);
+        Cookie targetCookie = reqResHandler.getCookieByName(request, "loginUser");
 
         if (targetCookie != null) {
             model.addAttribute("loginedUser", targetCookie.getValue());
+            Cookie role = reqResHandler.getCookieByName(request, "role");
+            model.addAttribute("role", role.getValue());
         }
 
         Article article = articleService.getById(id);
@@ -60,11 +64,14 @@ public class ArticleController {
     // write
     @GetMapping("/article/write")
     public String articleWrite(Model model, HttpServletRequest request) {
-        Cookie targetCookie = reqResHandler.getLoginCookie(request);
+        Cookie targetCookie = reqResHandler.getCookieByName(request, "loginUser");
 
         if (targetCookie != null) {
             model.addAttribute("loginedUser", targetCookie.getValue());
+            Cookie role = reqResHandler.getCookieByName(request, "role");
+            model.addAttribute("role", role.getValue());
         }
+
         return "article/write";
     }
 

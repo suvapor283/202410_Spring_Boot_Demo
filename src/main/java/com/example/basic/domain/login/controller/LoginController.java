@@ -37,17 +37,21 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@Valid loginForm loginForm, HttpServletResponse response) {
         String dbUser = "hong";
-        String dbpass = "1234";
+        String dbPass = "1234";
+        String dbRole = "admin";
 
-        if (!dbUser.equals(loginForm.username) || !dbpass.equals(loginForm.password)) {
+        if (!dbUser.equals(loginForm.username) || !dbPass.equals(loginForm.password)) {
             return "login-fail";
         }
 
         Cookie cookie = new Cookie("loginUser", loginForm.username);
+        Cookie role = new Cookie("role", dbRole);
 
         cookie.setMaxAge(60 * 60);
         cookie.setPath("/");
+
         response.addCookie(cookie);
+        response.addCookie(role);
 
         return "redirect:/article/list";
     }
@@ -55,7 +59,7 @@ public class LoginController {
     // logout
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
-        Cookie targetCookie = reqResHandler.getLoginCookie(request);
+        Cookie targetCookie = reqResHandler.getCookieByName(request, "loginUser");
 
         if (targetCookie != null) {
             targetCookie.setMaxAge(0);
