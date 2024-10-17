@@ -24,6 +24,10 @@ public class AdminController {
 
         Cookie role = reqResHandler.getCookieByName(request, "role");
 
+        if(!role.getValue().equals("admin")){
+            throw new RuntimeException("관리자 권한만 접근 가능합니다.");
+        }
+
         model.addAttribute("role", role.getValue());
         model.addAttribute("loginedUser", targetCookie.getValue());
 
