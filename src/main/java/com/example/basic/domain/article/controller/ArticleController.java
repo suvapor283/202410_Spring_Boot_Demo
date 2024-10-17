@@ -3,8 +3,6 @@ package com.example.basic.domain.article.controller;
 import com.example.basic.domain.article.entity.Article;
 import com.example.basic.domain.article.service.ArticleService;
 import com.example.basic.global.ReqResHandler;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -21,13 +19,14 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/article")
 public class ArticleController {
 
     private final ArticleService articleService;
     private final ReqResHandler reqResHandler;
 
-    // list
-    @RequestMapping("/article/list")
+    // 전체 조회 (list)
+    @RequestMapping("/list")
     public String list(Model model) {
         List<Article> articleList = articleService.getAll();
 
@@ -36,16 +35,9 @@ public class ArticleController {
         return "article/list";
     }
 
-    // detail
-    @RequestMapping("/article/detail/{id}")
-    public String detail(@PathVariable("id") long id, Model model, HttpServletRequest request) {
-        Cookie targetCookie = reqResHandler.getCookieByName(request, "loginUser");
-
-        if (targetCookie != null) {
-            model.addAttribute("loginedUser", targetCookie.getValue());
-            Cookie role = reqResHandler.getCookieByName(request, "role");
-            model.addAttribute("role", role.getValue());
-        }
+    // 단건 조회 (detail)
+    @RequestMapping("/detail/{id}")
+    public String detail(@PathVariable("id") long id, Model model) {
 
         Article article = articleService.getById(id);
         model.addAttribute("article", article);
@@ -53,16 +45,9 @@ public class ArticleController {
         return "article/detail";
     }
 
-    // write
-    @GetMapping("/article/write")
-    public String articleWrite(Model model, HttpServletRequest request) {
-        Cookie targetCookie = reqResHandler.getCookieByName(request, "loginUser");
-
-        if (targetCookie != null) {
-            model.addAttribute("loginedUser", targetCookie.getValue());
-            Cookie role = reqResHandler.getCookieByName(request, "role");
-            model.addAttribute("role", role.getValue());
-        }
+    // 작성 (write)
+    @GetMapping("/write")
+    public String articleWrite() {
 
         return "article/write";
     }
@@ -76,14 +61,14 @@ public class ArticleController {
         private String body;
     }
 
-    @PostMapping("/article/write")
+    @PostMapping("/write")
     public String write(@Valid WriteForm writeForm, Model model) {
         articleService.write(writeForm.title, writeForm.body);
 
         return "redirect:/article/list";
     }
 
-    // modify
+    // 수정 (modify)
     @Getter
     @Setter
     public static class ModifyForm {
@@ -93,15 +78,15 @@ public class ArticleController {
         private String body;
     }
 
-    @RequestMapping("/article/modify/{id}")
+    @RequestMapping("/modify/{id}")
     public String modify(@PathVariable("id") long id, @Valid ModifyForm modifyForm) {
         articleService.update(id, modifyForm.getTitle(), modifyForm.getBody());
 
         return "redirect:/article/detail/%d".formatted(id);
     }
 
-    // delete
-    @RequestMapping("/article/delete/{id}")
+    // 삭제 (delete)
+    @RequestMapping("/delete/{id}")
     public String delete(@PathVariable long id) {
         articleService.deleteById(id);
 

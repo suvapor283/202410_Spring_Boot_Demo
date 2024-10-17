@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>layout</title>
+    <title>demo</title>
     <link href="/global.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.13/dist/full.min.css" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -33,7 +33,9 @@
                 <li th:if="${session.loginUser}"><a href="/logout">로그아웃</a></li>
                 <li th:unless="${session.loginUser}"><a href="/login">로그인</a></li>
                 <li><a href="#">회원가입</a></li>
-                <li th:if="${session.loginUser != null and session.role != null and session.role.equals('admin')}"><a href="/admin/main">관리자</a></li>
+                <li th:if="${session.loginUser != null and session.role != null and session.role.equals('admin')}">
+                    <a href="/admin/main">관리자</a>
+                </li>
             </ul>
         </div>
     </div>

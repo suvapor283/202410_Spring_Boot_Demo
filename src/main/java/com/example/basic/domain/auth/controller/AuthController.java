@@ -21,7 +21,7 @@ public class AuthController {
 
     private final ReqResHandler reqResHandler;
 
-    // login
+    // 로그인 (login)
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -74,7 +74,7 @@ public class AuthController {
         return "redirect:/article/list";
     }
 
-    // logout
+    // 로그아웃 (logout)
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
