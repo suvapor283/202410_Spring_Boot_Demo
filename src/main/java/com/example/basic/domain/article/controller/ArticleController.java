@@ -28,9 +28,9 @@ public class ArticleController {
 
     // list
     @RequestMapping("/article/list")
-    public String list(Model model, HttpServletRequest request) {
+    public String list(Model model) {
         List<Article> articleList = articleService.getAll();
-        
+
         model.addAttribute("articleList", articleList);
 
         return "article/list";

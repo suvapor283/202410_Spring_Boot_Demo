@@ -40,7 +40,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid loginForm loginForm, HttpServletResponse response, HttpSession session) {
+    public String login(@Valid loginForm loginForm, HttpSession session) {
         List<Member> memberList = new ArrayList<>();
 
         Member member1 = Member.builder()
