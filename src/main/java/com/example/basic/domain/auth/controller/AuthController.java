@@ -1,5 +1,6 @@
-package com.example.basic.domain.login.controller;
+package com.example.basic.domain.auth.controller;
 
+import com.example.basic.domain.auth.entity.Member;
 import com.example.basic.global.ReqResHandler;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,9 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
-public class LoginController {
+public class AuthController {
 
     private final ReqResHandler reqResHandler;
 
@@ -36,16 +40,38 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@Valid loginForm loginForm, HttpServletResponse response) {
-        String dbUser = "hong";
-        String dbPass = "1234";
-        String dbRole = "admin";
+        List<Member> memberList = new ArrayList<>();
 
-        if (!dbUser.equals(loginForm.username) || !dbPass.equals(loginForm.password)) {
+        Member member1 = Member.builder()
+                .username("hong")
+                .password("1234")
+                .role("admin")
+                .build();
+
+        Member member2 = Member.builder()
+                .username("kim")
+                .password("1234")
+                .role("normal")
+                .build();
+
+        memberList.add(member1);
+        memberList.add(member2);
+
+        Member targetMember = null;
+
+        for (Member member : memberList) {
+            if (member.getUsername().equals(loginForm.username) && member.getPassword().equals(loginForm.password)) {
+                targetMember = member;
+                break;
+            }
+        }
+
+        if (targetMember == null) {
             return "login-fail";
         }
 
         Cookie cookie = new Cookie("loginUser", loginForm.username);
-        Cookie role = new Cookie("role", dbRole);
+        Cookie role = new Cookie("role", targetMember.getRole());
 
         cookie.setMaxAge(60 * 60);
         cookie.setPath("/");
