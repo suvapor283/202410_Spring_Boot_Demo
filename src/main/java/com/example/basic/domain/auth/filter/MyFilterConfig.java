@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Configuration;
 public class MyFilterConfig {
 
     @Bean
-    public FilterRegistrationBean<TestFilter> testFilterRegistrationBean() {
-        FilterRegistrationBean<TestFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new TestFilter());
-        registrationBean.addUrlPatterns("/*");
+    public FilterRegistrationBean<AdminFilter> adminFilterRegistrationBean() {
+        FilterRegistrationBean<AdminFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new AdminFilter());
+        registrationBean.addUrlPatterns("/admin/*");
 
         return registrationBean;
     }
