@@ -24,7 +24,7 @@ class SpringBasicApplicationTests {
             System.out.println(strList.get(i));
         }
 
-        for (String str : strList){
+        for (String str : strList) {
             System.out.println(str);
         }
     }
