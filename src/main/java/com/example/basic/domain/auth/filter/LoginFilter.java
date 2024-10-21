@@ -14,7 +14,7 @@ public class LoginFilter implements Filter {
 
         String username = (String) session.getAttribute("loginUser");
 
-        if (username == null){
+        if (username == null) {
             throw new RuntimeException("로그인이 필요한 기능입니다.");
         }
 
