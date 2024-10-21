@@ -15,4 +15,13 @@ public class MyFilterConfig {
 
         return registrationBean;
     }
+
+    @Bean
+    public FilterRegistrationBean<LoginFilter> loginFilterRegistrationBean() {
+        FilterRegistrationBean<LoginFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new LoginFilter());
+        registrationBean.addUrlPatterns("/article/write", "/article/delete/*", "/article/modify/*");
+
+        return registrationBean;
+    }
 }
