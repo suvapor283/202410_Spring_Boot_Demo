@@ -1,7 +1,6 @@
 package com.example.basic.domain.auth.controller;
 
 import com.example.basic.domain.auth.entity.Member;
-import com.example.basic.global.ReqResHandler;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -18,8 +17,6 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
-
-    private final ReqResHandler reqResHandler;
 
     // 로그인 (login)
     @GetMapping("/login")

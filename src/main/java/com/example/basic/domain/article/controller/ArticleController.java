@@ -2,7 +2,6 @@ package com.example.basic.domain.article.controller;
 
 import com.example.basic.domain.article.entity.Article;
 import com.example.basic.domain.article.service.ArticleService;
-import com.example.basic.global.ReqResHandler;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -23,7 +22,6 @@ import java.util.List;
 public class ArticleController {
 
     private final ArticleService articleService;
-    private final ReqResHandler reqResHandler;
 
     // 전체 조회 (list)
     @RequestMapping("/list")

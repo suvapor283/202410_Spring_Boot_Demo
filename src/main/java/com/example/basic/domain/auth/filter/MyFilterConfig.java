@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MyFilterConfig {
 
+    // 관리자 권한 체크 (admin filter)
     @Bean
     public FilterRegistrationBean<AdminFilter> adminFilterRegistrationBean() {
         FilterRegistrationBean<AdminFilter> registrationBean = new FilterRegistrationBean<>();
@@ -16,6 +17,7 @@ public class MyFilterConfig {
         return registrationBean;
     }
 
+    // 로그인 권한 체크 (login filter)
     @Bean
     public FilterRegistrationBean<LoginFilter> loginFilterRegistrationBean() {
         FilterRegistrationBean<LoginFilter> registrationBean = new FilterRegistrationBean<>();

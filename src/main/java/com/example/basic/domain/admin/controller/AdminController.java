@@ -1,6 +1,5 @@
 package com.example.basic.domain.admin.controller;
 
-import com.example.basic.global.ReqResHandler;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @AllArgsConstructor
 @RequestMapping("/admin")
 public class AdminController {
-
-    private final ReqResHandler reqResHandler;
 
     // 메인 (main)
     @GetMapping("/main")
