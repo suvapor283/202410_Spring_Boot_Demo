@@ -1,7 +1,6 @@
 package com.example.basic.domain.auth.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -13,7 +12,13 @@ import lombok.*;
 public class Member {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(unique = true)
     private String username;
+
     private String password;
+
     private String role;
 }
