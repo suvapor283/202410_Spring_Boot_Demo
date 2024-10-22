@@ -64,7 +64,7 @@ class SpringBasicApplicationTests {
         // delete
         Optional<Member> memberOptional = memberRepository.findById(1L);
 
-        if (memberOptional.isPresent()){
+        if (memberOptional.isPresent()) {
             Member member = memberOptional.get();
 
             memberRepository.delete(member);
@@ -79,7 +79,7 @@ class SpringBasicApplicationTests {
     void t5() {
         Optional<Member> memberOptional = memberRepository.findById(1L);
 
-        if (memberOptional.isPresent()){
+        if (memberOptional.isPresent()) {
             Member member = memberOptional.get();
 
             member.setUsername("lee");
