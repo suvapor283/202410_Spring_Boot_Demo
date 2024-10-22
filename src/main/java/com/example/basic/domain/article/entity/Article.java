@@ -1,9 +1,7 @@
 package com.example.basic.domain.article.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.basic.domain.auth.entity.Member;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Setter
@@ -22,5 +20,7 @@ public class Article {
 
     private String body;
 
-    private long memberId;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Member author;
 }

@@ -96,29 +96,25 @@ class SpringBasicApplicationTests {
     }
 
     @Test
-    @DisplayName("Article에 외래키로 memberId 넣어서 저장")
+    @DisplayName("JPA 연관관계를 이용한 데이터 저장")
     void t6() {
-        Member member = new Member();
-        member.setUsername("kim");
-        member.setPassword("1234");
-        member.setRole("admin");
+        Member m1 = new Member();
+        m1.setUsername("hong");
+        m1.setPassword("1234");
+        m1.setRole("admin");
 
-        Article article = new Article();
-        article.setTitle("테스트 제목1");
-        article.setBody("테스트 내용1");
-        article.setMemberId(1L);
-
-        memberRepository.save(member);
-        articleRepository.save(article);
+        Article a1 = new Article();
+        a1.setTitle("테스트 제목1");
+        a1.setBody("테스트 내용1");
+        a1.setAuthor(m1);
     }
 
     @Test
-    @DisplayName("게시물 정보와 작성자 정보 같이 가져오기")
+    @DisplayName("JPA 연관관계를 이용한 데이터 조회")
     void t7() {
         Article article = articleRepository.findById(1L).get();
 
-        long memberId = article.getMemberId();
-
-        System.out.println(memberRepository.findById(memberId));
+        System.out.println(article.getTitle());
+        System.out.println(article.getAuthor().getUsername());
     }
 }
