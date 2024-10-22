@@ -33,7 +33,7 @@
                 <li th:if="${session.loginMember}"><a href="/logout">로그아웃</a></li>
                 <li th:unless="${session.loginMember}"><a href="/login">로그인</a></li>
                 <li><a href="#">회원가입</a></li>
-                <li th:if="${session.loginMember != null and session.role != null and session.role.equals('admin')}">
+                <li th:if="${session.loginMember != null and session.loginMember.role != null and session.loginMember.role.equals('admin')}">
                     <a href="/admin/main">관리자</a>
                 </li>
             </ul>
@@ -44,7 +44,7 @@
     </div>
     <div class="navbar-end">
         <div th:if="${session.loginMember}">
-            <span th:text="${session.loginMember}"></span>님! 반갑습니다
+            <span th:text="${session.loginMember.username}"></span>님! 반갑습니다
         </div>
         <button class="btn btn-ghost btn-circle">
             <svg
