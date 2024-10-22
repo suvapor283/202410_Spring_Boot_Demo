@@ -2,6 +2,8 @@ package com.example.basic.domain.article.controller;
 
 import com.example.basic.domain.article.entity.Article;
 import com.example.basic.domain.article.service.ArticleService;
+import com.example.basic.domain.auth.entity.Member;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -60,8 +62,10 @@ public class ArticleController {
     }
 
     @PostMapping("/write")
-    public String write(@Valid WriteForm writeForm, Model model) {
-        articleService.write(writeForm.title, writeForm.body);
+    public String write(@Valid WriteForm writeForm, HttpSession session) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+
+        articleService.write(writeForm.title, writeForm.body, loginMember);
 
         return "redirect:/article/list";
     }

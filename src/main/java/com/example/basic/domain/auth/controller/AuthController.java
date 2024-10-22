@@ -42,8 +42,7 @@ public class AuthController {
             return "login-fail";
         }
 
-        session.setAttribute("loginUser", targetMember.getUsername());
-        session.setAttribute("role", targetMember.getRole());
+        session.setAttribute("loginMember", targetMember);
 
         return "redirect:/article/list";
     }

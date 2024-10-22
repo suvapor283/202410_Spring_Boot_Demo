@@ -1,5 +1,6 @@
 package com.example.basic.domain.auth.filter;
 
+import com.example.basic.domain.auth.entity.Member;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -12,9 +13,9 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
 
-        String username = (String) session.getAttribute("loginUser");
+        Member loginMember = (Member) session.getAttribute("loginMember");
 
-        if (username == null) {
+        if (loginMember == null) {
             throw new RuntimeException("로그인이 필요한 기능입니다.");
         }
 

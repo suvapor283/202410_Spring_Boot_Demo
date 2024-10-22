@@ -2,6 +2,7 @@ package com.example.basic.domain.article.service;
 
 import com.example.basic.domain.article.entity.Article;
 import com.example.basic.domain.article.repository.ArticleRepository;
+import com.example.basic.domain.auth.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +30,11 @@ public class ArticleService {
         return articleOptional.get();
     }
 
-    public void write(String title, String body) {
+    public void write(String title, String body, Member author) {
         Article article = new Article();
         article.setTitle(title);
         article.setBody(body);
+        article.setAuthor(author);
 
         articleRepository.save(article);
     }
