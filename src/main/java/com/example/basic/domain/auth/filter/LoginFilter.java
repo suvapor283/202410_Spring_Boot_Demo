@@ -12,12 +12,16 @@ public class LoginFilter implements Filter {
 
     private ReqResHandler reqResHandler;
 
+    public LoginFilter(ReqResHandler reqResHandler) {
+        this.reqResHandler = reqResHandler;
+    }
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
 
-        Member loginMember = (Member) session.getAttribute("loginMember");
+        Member loginMember = reqResHandler.getLoginMember();
 
         if (loginMember == null) {
             throw new RuntimeException("로그인이 필요한 기능입니다.");
