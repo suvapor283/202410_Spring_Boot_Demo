@@ -87,8 +87,8 @@ class SpringBasicApplicationTests {
         if (memberOptional.isPresent()) {
             Member member = memberOptional.get();
 
-            member.setUsername("lee");
-            member.setPassword("4321");
+            member.setUsername("kim");
+            member.setPassword("1234");
             member.setRole("admin");
 
             memberRepository.save(member);
@@ -103,10 +103,14 @@ class SpringBasicApplicationTests {
         m1.setPassword("1234");
         m1.setRole("admin");
 
+        memberRepository.save(m1);
+
         Article a1 = new Article();
         a1.setTitle("테스트 제목1");
         a1.setBody("테스트 내용1");
         a1.setAuthor(m1);
+
+        articleRepository.save(a1);
     }
 
     @Test
