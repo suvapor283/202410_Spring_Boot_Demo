@@ -1,4 +1,4 @@
-package com.example.basic.global;
+package com.example.basic.global.reqres;
 
 import com.example.basic.domain.auth.entity.Member;
 import jakarta.servlet.http.HttpSession;

@@ -1,6 +1,6 @@
 package com.example.basic.domain.auth.filter;
 
-import com.example.basic.global.ReqResHandler;
+import com.example.basic.global.reqres.ReqResHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

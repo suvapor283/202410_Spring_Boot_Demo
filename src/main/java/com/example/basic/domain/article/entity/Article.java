@@ -5,6 +5,7 @@ import com.example.basic.domain.comment.entity.Comment;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -28,5 +29,5 @@ public class Article {
     private Member author;
 
     @OneToMany(mappedBy = "article")
-    List<Comment> commentlist;
+    List<Comment> commentlist = new ArrayList<>();
 }

@@ -1,7 +1,7 @@
 package com.example.basic.domain.auth.filter;
 
 import com.example.basic.domain.auth.entity.Member;
-import com.example.basic.global.ReqResHandler;
+import com.example.basic.global.reqres.ReqResHandler;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
