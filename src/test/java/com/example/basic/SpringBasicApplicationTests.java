@@ -47,7 +47,7 @@ class SpringBasicApplicationTests {
     @Test
     @DisplayName("회원 단건 조회 - findById")
     void t3() {
-        Optional<Member> memberOptional = memberRepository.findById("hong");
+        Optional<Member> memberOptional = memberRepository.findById(1L);
 
         if (memberOptional.isPresent()) {
             Member member = memberOptional.get();
@@ -62,25 +62,31 @@ class SpringBasicApplicationTests {
     @DisplayName("회원 삭제 - delete, deleteById")
     void t4() {
         // delete
-        Optional<Member> memberOptional = memberRepository.findById("kim");
-        Member member = memberOptional.get();
+        Optional<Member> memberOptional = memberRepository.findById(1L);
 
-        memberRepository.delete(member);
+        if (memberOptional.isPresent()){
+            Member member = memberOptional.get();
+
+            memberRepository.delete(member);
+        }
 
         // deleteById
-        memberRepository.deleteById("kim");
+        memberRepository.deleteById(1L);
     }
 
     @Test
     @DisplayName("회원 수정 - save")
     void t5() {
-        Optional<Member> memberOptional = memberRepository.findById("kim");
-        Member member = memberOptional.get();
+        Optional<Member> memberOptional = memberRepository.findById(1L);
 
-        member.setUsername("lee");
-        member.setPassword("4321");
-        member.setRole("admin");
+        if (memberOptional.isPresent()){
+            Member member = memberOptional.get();
 
-        memberRepository.save(member);
+            member.setUsername("lee");
+            member.setPassword("4321");
+            member.setRole("admin");
+
+            memberRepository.save(member);
+        }
     }
 }
