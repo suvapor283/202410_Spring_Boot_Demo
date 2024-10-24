@@ -26,7 +26,7 @@ public class ArticleController {
     private final ArticleService articleService;
 
     // 전체 조회 (list)
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public String list(Model model) {
         List<Article> articleList = articleService.getAll();
 

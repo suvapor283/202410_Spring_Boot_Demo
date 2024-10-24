@@ -15,7 +15,7 @@ public class CommentController {
 
     @PostMapping("/write")
     public String write(String body, long articleId) {
-        commentService.write(body);
+        commentService.write(body, articleId);
 
         return "redirect:/article/detail/%d".formatted(articleId);
     }
