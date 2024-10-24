@@ -23,7 +23,7 @@ public class ArticleService {
     public Article getById(long id) {
         Optional<Article> articleOptional = articleRepository.findById(id);
 
-        if(articleOptional.isEmpty()){
+        if (articleOptional.isEmpty()) {
             throw new RuntimeException("존재하지 않는 게시물입니다.");
         }
 
@@ -48,7 +48,8 @@ public class ArticleService {
     }
 
     public void deleteById(long id) {
+        Article article = getById(id);
 
-        articleRepository.deleteById(id);
+        articleRepository.delete(article);
     }
 }

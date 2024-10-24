@@ -25,11 +25,15 @@
     </form>
     <hr>
     <ul>
-        <li th:each="comment : ${article.commentList}">
-            <form action="">
+        <li class="flex" th:each="comment : ${article.commentList}">
+            <form method="post" th:action="@{|/comment/modify/${comment.id}|}">
                 <input name="body" th:value="${comment.body}" type="text">
                 <input name="articleId" th:value="${article.id}" type="hidden">
                 <input class="btn btn-xs" type="submit" value="수정">
+            </form>
+            <form method="post" th:action="@{|/comment/delete/${comment.id}|}">
+                <input name="articleId" th:value="${article.id}" type="hidden">
+                <input class="btn btn-xs" type="submit" value="삭제">
             </form>
         </li>
     </ul>

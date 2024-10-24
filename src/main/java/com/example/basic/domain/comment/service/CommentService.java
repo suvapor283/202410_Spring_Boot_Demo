@@ -33,6 +33,12 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
+    public void deleteById(long id) {
+        Comment comment = getById(id);
+
+        commentRepository.delete(comment);
+    }
+
     public Comment getById(long id) {
         Optional<Comment> commentOptional = commentRepository.findById(id);
 
