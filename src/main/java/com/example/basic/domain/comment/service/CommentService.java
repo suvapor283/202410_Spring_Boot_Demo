@@ -7,6 +7,8 @@ import com.example.basic.domain.comment.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class CommentService {
@@ -22,5 +24,22 @@ public class CommentService {
         comment.setArticle(article);
 
         commentRepository.save(comment);
+    }
+
+    public void update(long id, String body) {
+        Comment comment = this.getById(id);
+        comment.setBody(body);
+
+        commentRepository.save(comment);
+    }
+
+    public Comment getById(long id) {
+        Optional<Comment> commentOptional = commentRepository.findById(id);
+
+        if (commentOptional.isEmpty()) {
+            throw new RuntimeException("없는 데이터입니다.");
+        }
+
+        return commentOptional.get();
     }
 }

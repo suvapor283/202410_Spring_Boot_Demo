@@ -29,5 +29,5 @@ public class Article {
     private Member author;
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    List<Comment> commentlist = new ArrayList<>();
+    List<Comment> commentList = new ArrayList<>();
 }
