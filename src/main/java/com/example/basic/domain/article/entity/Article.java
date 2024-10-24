@@ -28,6 +28,6 @@ public class Article {
     @JoinColumn(name = "author_id")
     private Member author;
 
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     List<Comment> commentlist = new ArrayList<>();
 }

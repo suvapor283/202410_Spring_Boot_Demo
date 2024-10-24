@@ -19,10 +19,15 @@
     </form>
     <hr>
     <form action="/comment/write" method="post">
-        <input type="text" name="body" placeholder="댓글을 입력해주세요.">
-        <input type="hidden" name="articleId" th:value="${article.id}">
+        <input name="body" placeholder="댓글을 입력해주세요." type="text">
+        <input name="articleId" th:value="${article.id}" type="hidden">
         <input type="submit" value="댓글 등록">
     </form>
+    <hr>
+    <ul>
+        <li th:each="comment : ${article.commentList}" th:text="${comment.body}"></li>
+    </ul>
+
     <script>
         function checkSubmit(form) {
             console.log('test');
