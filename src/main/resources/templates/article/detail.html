@@ -28,6 +28,7 @@
         <li class="flex" th:each="comment : ${article.commentList}">
             <form method="post" th:action="@{|/comment/modify/${comment.id}|}">
                 <input name="body" th:value="${comment.body}" type="text">
+                <input disabled th:value="${comment. author.username}" type="text">
                 <input name="articleId" th:value="${article.id}" type="hidden">
                 <input class="btn btn-xs" type="submit" value="수정">
             </form>

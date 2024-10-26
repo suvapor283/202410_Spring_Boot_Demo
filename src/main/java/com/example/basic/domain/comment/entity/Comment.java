@@ -1,6 +1,7 @@
 package com.example.basic.domain.comment.entity;
 
 import com.example.basic.domain.article.entity.Article;
+import com.example.basic.domain.auth.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,4 +22,8 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "article_id")
     private Article article;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Member author;
 }

@@ -2,6 +2,7 @@ package com.example.basic.domain.comment.service;
 
 import com.example.basic.domain.article.entity.Article;
 import com.example.basic.domain.article.service.ArticleService;
+import com.example.basic.domain.auth.entity.Member;
 import com.example.basic.domain.comment.entity.Comment;
 import com.example.basic.domain.comment.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +17,13 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final ArticleService articleService;
 
-    public void write(String body, long articleId) {
+    public void write(String body, long articleId, Member author) {
         Article article = articleService.getById(articleId);
 
         Comment comment = new Comment();
         comment.setBody(body);
         comment.setArticle(article);
+        comment.setAuthor(author);
 
         commentRepository.save(comment);
     }

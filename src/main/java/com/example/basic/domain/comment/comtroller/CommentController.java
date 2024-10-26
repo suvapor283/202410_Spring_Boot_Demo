@@ -1,7 +1,9 @@
 package com.example.basic.domain.comment.comtroller;
 
+import com.example.basic.domain.auth.entity.Member;
 import com.example.basic.domain.comment.CommentForm;
 import com.example.basic.domain.comment.service.CommentService;
+import com.example.basic.global.reqres.ReqResHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CommentController {
 
     private final CommentService commentService;
+    private final ReqResHandler reqResHandler;
 
     // 댓글 작성
     @GetMapping("/write")
@@ -25,7 +28,8 @@ public class CommentController {
 
     @PostMapping("/write")
     public String write(CommentForm commentForm) {
-        commentService.write(commentForm.getBody(), commentForm.getArticleId());
+        Member loginMember = reqResHandler.getLoginMember();
+        commentService.write(commentForm.getBody(), commentForm.getArticleId(), loginMember);
 
         return "redirect:/article/detail/%d".formatted(commentForm.getArticleId());
     }
