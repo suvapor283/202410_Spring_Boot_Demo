@@ -32,3 +32,4 @@ public class AdminController {
         return "admin/stat";
     }
 }
+// 23부터
