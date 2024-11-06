@@ -13,14 +13,14 @@ public class AuthService {
 
     private final MemberService memberService;
 
-    public Member getLoginMember(String username) {
+    public Member getLoginMember(String username, String password) {
 
-        Optional<Member> memberOptional = memberRepository.findByUsername(username);
+        Member member = memberService.getByUsernameOrNull(username);
 
-        if (memberOptional.isEmpty()) {
+        if (member == null || !member.getPassword().equals(password)){
             throw new RuntimeException("잘못된 회원정보입니다.");
         }
 
-        return memberOptional.get();
+        return member;
     }
 }

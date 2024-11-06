@@ -1,7 +1,9 @@
 package com.example.basic.domain.auth.controller;
 
+import com.example.basic.domain.auth.service.AuthService;
 import com.example.basic.domain.member.entity.Member;
 import com.example.basic.domain.member.service.MemberService;
+import com.example.basic.global.reqres.ReqResHandler;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -16,11 +18,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final MemberService memberService;
+    private final AuthService authService;
+    private final ReqResHandler reqResHandler;
 
     // 로그인 (login)
     @GetMapping("/login")
     public String login() {
+
         return "login";
     }
 
@@ -34,15 +38,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid loginForm loginForm, HttpSession session) {
+    public String login(@Valid loginForm loginForm) {
 
-        Member targetMember = memberService.getLoginMember(loginForm.username);
+        Member targetMember = authService.getLoginMember(loginForm.username, loginForm.password);
 
-        if (targetMember == null || !targetMember.getPassword().equals(loginForm.password)) {
-            return "login-fail";
-        }
-
-        session.setAttribute("loginMember", targetMember);
+        reqResHandler.setLoginMember(targetMember);
 
         return "redirect:/article/list";
     }
