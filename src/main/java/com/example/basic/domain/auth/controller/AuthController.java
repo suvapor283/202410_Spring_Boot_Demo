@@ -1,7 +1,7 @@
 package com.example.basic.domain.auth.controller;
 
-import com.example.basic.domain.auth.entity.Member;
-import com.example.basic.domain.auth.service.MemberService;
+import com.example.basic.domain.member.entity.Member;
+import com.example.basic.domain.member.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

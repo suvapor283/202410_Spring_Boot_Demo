@@ -1,6 +1,6 @@
 package com.example.basic.domain.comment.comtroller;
 
-import com.example.basic.domain.auth.entity.Member;
+import com.example.basic.domain.member.entity.Member;
 import com.example.basic.domain.comment.CommentForm;
 import com.example.basic.domain.comment.service.CommentService;
 import com.example.basic.global.reqres.ReqResHandler;

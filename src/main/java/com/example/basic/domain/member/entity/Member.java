@@ -1,4 +1,4 @@
-package com.example.basic.domain.auth.entity;
+package com.example.basic.domain.member.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
