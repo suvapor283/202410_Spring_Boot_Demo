@@ -52,4 +52,9 @@ public class ArticleService {
 
         articleRepository.delete(article);
     }
+
+    public List<Article> getArticlesByAuthor(Member author) {
+
+        return articleRepository.findByAuthor(author);
+    }
 }
