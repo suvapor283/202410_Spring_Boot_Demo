@@ -1,7 +1,10 @@
 package com.example.basic.domain.member.entity;
 
+import com.example.basic.domain.article.entity.Article;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,6 +24,9 @@ public class Member {
     private String password;
 
     private String role;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Article> articles;
 
     public String switchKoreanRole() {
         switch (this.role) {

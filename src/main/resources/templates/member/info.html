@@ -1,5 +1,9 @@
 <html lang="ko" layout:decorate="~{global/layout}">
-<div layout:fragment="content">
-    <h1>info</h1>
-</div>
+<ul layout:fragment="content">
+    <h1><span th:text="${session.loginMember.username}"></span>님이 작성한 게시물 목록</h1>
+    <li th:each="article : ${articleList}">
+        <a th:href="@{|/article/detail.${article.id}|}"
+           th:text="${article.id} + ' , ' + ${article.title} + ' , ' + ${article.author.username} + '(' + ${article.author.switchKoreanRole()} + ')'"></a>
+    </li>
+</ul>
 </html>
