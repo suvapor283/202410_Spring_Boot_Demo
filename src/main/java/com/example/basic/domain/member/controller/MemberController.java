@@ -18,11 +18,12 @@ import java.util.List;
 public class MemberController {
 
     private final ReqResHandler reqResHandler;
+    private MemberService memberService;
 
     @GetMapping("/info")
     public String info(Model model) {
         Member loginMember = reqResHandler.getLoginMember();
-        List<Article> articleList = loginMember.getArticles();
+        List<Article> articleList = memberService.getArticlesByAuthor(loginMember);
 
         model.addAttribute("articleList", articleList);
 

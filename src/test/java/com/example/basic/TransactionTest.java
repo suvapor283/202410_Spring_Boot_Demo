@@ -12,9 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.w3c.dom.stylesheets.LinkStyle;
-
-import java.util.List;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -125,13 +122,14 @@ public class TransactionTest {
 
     @Test
     @DisplayName("Lazy 로딩")
+    @Transactional
     void t6() {
         Member m1 = memberRepository.findById(1L).get();
 
-        List<Article> articles = m1.getArticles();
+//        List<Article> articles = m1.getArticles();
 
-        for (Article article : articles) {
-            System.out.println(article.getTitle());
-        }
+//        for (Article article : articles) {
+//            System.out.println(article.getTitle());
+//        }
     }
 }
