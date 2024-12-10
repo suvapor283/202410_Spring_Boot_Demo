@@ -2,7 +2,6 @@ package com.example.basic.domain.auth.controller;
 
 import com.example.basic.domain.auth.service.AuthService;
 import com.example.basic.domain.member.entity.Member;
-import com.example.basic.domain.member.service.MemberService;
 import com.example.basic.global.reqres.ReqResHandler;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
