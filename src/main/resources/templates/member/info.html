@@ -11,8 +11,8 @@
     <h1><span th:text="${session.loginMember.username}"></span>님이 작성한 댓글 목록</h1>
     <ul>
         <li th:each="comment : ${commentList}">
-            <a href="#"
-               th:text="${comment.body} + ' , ' + ${comment.author.username} + '(' + ${comment.author.switchKoreanRole()} + ')'"></a>
+            <a th:href="@{|/article/detail/${comment.article.id}|}"
+               th:text="${comment.article.id} + ' , ' + ${comment.body} + ' , ' + ${comment.author.username} + '(' + ${comment.author.switchKoreanRole()} + ')'"></a>
         </li>
     </ul>
 </div>

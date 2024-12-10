@@ -20,7 +20,6 @@ public class Comment {
     private String body;
 
     @ManyToOne
-    @JoinColumn(name = "article_id")
     private Article article;
 
     @ManyToOne

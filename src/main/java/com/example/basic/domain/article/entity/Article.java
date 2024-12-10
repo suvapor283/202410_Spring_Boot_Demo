@@ -25,7 +25,6 @@ public class Article {
     private String body;
 
     @ManyToOne
-    @JoinColumn(name = "author_id")
     private Member author;
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
