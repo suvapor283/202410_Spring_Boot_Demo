@@ -1,9 +1,19 @@
 <html lang="ko" layout:decorate="~{global/layout}">
-<ul layout:fragment="content">
+<div layout:fragment="content">
     <h1><span th:text="${session.loginMember.username}"></span>님이 작성한 게시물 목록</h1>
-    <li th:each="article : ${articleList}">
-        <a th:href="@{|/article/detail.${article.id}|}"
-           th:text="${article.id} + ' , ' + ${article.title} + ' , ' + ${article.author.username} + '(' + ${article.author.switchKoreanRole()} + ')'"></a>
-    </li>
-</ul>
+    <ul>
+        <li th:each="article : ${articleList}">
+            <a th:href="@{|/article/detail.${article.id}|}"
+               th:text="${article.id} + ' , ' + ${article.title} + ' , ' + ${article.author.username} + '(' + ${article.author.switchKoreanRole()} + ')'"></a>
+        </li>
+    </ul>
+    <hr>
+    <h1><span th:text="${session.loginMember.username}"></span>님이 작성한 댓글 목록</h1>
+    <ul>
+        <li th:each="comment : ${commentList}">
+            <a href="#"
+               th:text="${comment.body} + ' , ' + ${comment.author.username} + '(' + ${comment.author.switchKoreanRole()} + ')'"></a>
+        </li>
+    </ul>
+</div>
 </html>

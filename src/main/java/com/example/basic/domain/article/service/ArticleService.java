@@ -55,6 +55,6 @@ public class ArticleService {
 
     public List<Article> getArticlesByAuthor(Member author) {
 
-        return articleRepository.findByAuthor(author);
+        return articleRepository.findByAuthorOrderByIdDesc(author);
     }
 }

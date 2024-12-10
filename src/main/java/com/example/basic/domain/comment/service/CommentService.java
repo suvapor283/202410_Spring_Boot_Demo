@@ -8,6 +8,7 @@ import com.example.basic.domain.comment.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,5 +50,10 @@ public class CommentService {
         }
 
         return commentOptional.get();
+    }
+
+    public List<Comment> getCommentsByAuthor(Member author) {
+
+        return commentRepository.findByAuthorOrderByIdDesc(author);
     }
 }
